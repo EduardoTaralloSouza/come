@@ -71,14 +71,14 @@ class CheckinViewController: UIViewController {
                 self.addUserEvent()
                 self.loading()
                 if !(checkin.eventId.isEmpty) && !(checkin.name.isEmpty) && !(checkin.email.isEmpty) {
-                    WebService().checkIn(checkin: checkin) { (sucess) in
+                    WebService().checkIn(checkin: checkin, completion: { (sucess) in
                         let alert = UIAlertController(title: "Uhuuu 🕺🏻", message: "Feito! Cadastro efetuado com sucesso 😜", preferredStyle: .alert)
                         let defaultAction = UIAlertAction(title: "OK", style: .default, handler: { action in self.goBack() })
                         alert.addAction(defaultAction)
                         DispatchQueue.main.async(execute: {
                             self.present(alert, animated: true)
                         })
-                    } onError: { (statusCodeError) in
+                    }) { (statusCodeError) in
                         DispatchQueue.main.async {
                             Util().showAlertMessage(on: self, title: "Atenção", message: "Tivemos problemas ao tentar acessar o servidor, por favor tente mais tarde")
                             self.activityIndicator.stopAnimating()

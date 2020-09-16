@@ -15,26 +15,19 @@ class EventsTableViewController: UITableViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        WebService().getEvents { (events) in
-//            guard let events = events else { return }
-//            self.events = events
-//            DispatchQueue.main.async {
-//                self.tableView.reloadData()
-//            }
-//        }
-        WebService().getEvents { (events) in
+
+        WebService().getEvents(completion: { (events) in
             guard let events = events else { return }
             self.events = events
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
-        } onError: { (statusCodeError) in
+        }) { (statusCode) in
             DispatchQueue.main.async {
                 self.tableView.reloadData()
                 Util().showAlertMessage(on: self, title: "Atenção", message: "Tivemos problemas ao tentar acessar o servidor, por favor tente mais tarde")
             }
         }
-
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
