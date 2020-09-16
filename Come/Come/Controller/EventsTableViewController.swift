@@ -25,7 +25,7 @@ class EventsTableViewController: UITableViewController {
         }) { (statusCode) in
             DispatchQueue.main.async {
                 self.tableView.reloadData()
-                Util().showAlertMessage(on: self, title: "Atenção", message: "Tivemos problemas ao tentar acessar o servidor, por favor tente mais tarde")
+                Util().showAlertMessage(on: self, title: "Atenção", message: "ERRO \(statusCode)\nTivemos problemas ao tentar acessar o servidor, por favor tente mais tarde.")
             }
         }
     }
